@@ -1,0 +1,134 @@
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>生日快乐</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+            font-family: "Arial";
+            color: white;
+            text-align: center;
+        }
+
+        #startScreen, #mainContent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #startScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #mainContent {
+            display: none;
+        }
+
+        .light {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: gold;
+            border-radius: 50%;
+            box-shadow: 0 0 20px gold;
+            animation: floatUp 3s linear forwards;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
+        }
+
+        #message {
+            position: absolute;
+            bottom: 20%;
+            width: 100%;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 开场页面 -->
+<div id="startScreen" onclick="start()">
+    💫 点我一下，有人想对你说话
+</div>
+
+<!-- 主页面 -->
+<div id="mainContent" onclick="createLight(event)">
+    <div id="message">点击屏幕点亮属于你的星星 ✨</div>
+</div>
+
+<script>
+    // ====== ✏️ 在这里修改她的名字 ======
+    const name = "田雨鑫";  
+
+    // ====== ✏️ 在这里写你想说的话（可以写多句）======
+    const messages = [
+        "生日快乐 " + 亲爱的鑫鑫咪 + " 🎂",
+        "很遗憾今年再一次没能陪在你身边",
+        "所以今天没有办法陪你过生日",
+        "但是我希望能有一个形式能在你的生日中出现一下",
+	"很高兴你的出现，我们一起度过了930天，也一起幸福了930天",
+        "最近我们都陷入了一些困惑，暂且称之为成长的烦恼吧",
+	"但我知道这只是暂时的，我觉得大家都会经历这一阶段，在完全离开学生时代和完全进入社会之间卡着",
+	"但不用担心也不用怀疑自己，你要相信你是很厉害的，北服毕业并且已经找到了一份合适的工作，所以不用考虑别人的薪资或者别人的生活怎么怎么样，你已经很好了",
+	"你足够优秀，足够认真，足够赤诚地去对待你的生活",
+	"你不会安于现状，你会想要提高自己的生活，这一点就足够让你值得也一定会有一个很好的未来",
+	"所以不用担心，一切的闹心都是暂时的",
+        "就像很多小动物都会有一个尴尬期，但尴尬期过后一定是美丽萌物",
+        "而你现在已经是一位明媚的美丽萌物了，偷摸乐去吧(也可以明着乐)",
+	"希望我俩都能够暴富！",
+        "希望我们还能在一起很多很多很多很多很多天"，
+	"系望你不止生日，每天都快乐",
+
+    ];
+
+    let index = 0;
+
+    function start() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+    }
+
+    function createLight(e) {
+        // 创建小灯
+        const light = document.createElement("div");
+        light.className = "light";
+
+        light.style.left = e.clientX + "px";
+        light.style.top = e.clientY + "px";
+
+        document.body.appendChild(light);
+
+        // 显示一句话
+        const msg = document.getElementById("message");
+        msg.innerText = messages[index % messages.length];
+
+        index++;
+
+        // 删除灯（防止太多卡顿）
+        setTimeout(() => {
+            light.remove();
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
+```
